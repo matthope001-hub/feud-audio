@@ -5,18 +5,30 @@
 <audio id="a" loop>
   <source src="family-feud-theme.mp3" type="audio/mpeg">
 </audio>
+<audio id="ding">
+  <source src="family-feud-good-answer.mp3" type="audio/mpeg">
+</audio>
+<audio id="buzz">
+  <source src="wrong-answer-family-feud-strike.mp3" type="audio/mpeg">
+</audio>
 <script>
-  var a = document.getElementById('a');
-  a.volume = 0.6;
+  var a    = document.getElementById('a');
+  var ding = document.getElementById('ding');
+  var buzz = document.getElementById('buzz');
+  a.volume    = 0.6;
+  ding.volume = 0.8;
+  buzz.volume = 0.8;
   window.addEventListener('message', function(e) {
-    if (e.data === 'play') a.play();
-    if (e.data === 'stop') { a.pause(); a.currentTime = 0; }
-    if (e.data === 'fade') {
+    if (e.data === 'play')  { a.play(); }
+    if (e.data === 'stop')  { a.pause(); a.currentTime = 0; }
+    if (e.data === 'fade')  {
       var t = setInterval(function() {
         if (a.volume > 0.05) { a.volume -= 0.05; }
         else { a.pause(); clearInterval(t); }
       }, 40);
     }
+    if (e.data === 'ding')  { ding.currentTime = 0; ding.play(); }
+    if (e.data === 'buzz')  { buzz.currentTime = 0; buzz.play(); }
     if (typeof e.data === 'number') a.volume = e.data;
   });
 </script>
