@@ -19,7 +19,7 @@
   ding.volume = 0.8;
   buzz.volume = 0.8;
   window.addEventListener('message', function(e) {
-    if (e.data === 'play')  { a.play(); }
+    if (e.data === 'play')  { a.volume = 0.6; a.currentTime = 0; a.play(); }
     if (e.data === 'stop')  { a.pause(); a.currentTime = 0; }
     if (e.data === 'fade')  {
       var t = setInterval(function() {
